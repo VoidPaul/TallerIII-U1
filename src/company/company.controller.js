@@ -50,6 +50,36 @@ export const getCompanyById = async (req, res) => {
   }
 }
 
-export const getCompanies = async (req, res) => {}
+export const getCompanies = async (req, res) => {
+  try {
+    const { limit = 5, from = 0 } = req.query
 
-export const updateCompany = async (req, res) => {}
+    const [total, companies] = await Promise.all([
+      Company.countDocuments(),
+      Company.find().skip(Number(from)).limit(Number(limit)),
+    ])
+
+    return res.status(200).json({
+      success: true,
+      total,
+      companies,
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Error listing companies.",
+      error: err.message,
+    })
+  }
+}
+
+export const updateCompany = async (req, res) => {
+  try {
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Error listing companies.",
+      error: err.message,
+    })
+  }
+}

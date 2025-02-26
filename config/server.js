@@ -43,7 +43,7 @@ const routes = (app) => {
   app.use("/coperex-enterprise/v1/company", companyRoutes)
 }
 
-const conectarDB = async () => {
+const connectDB = async () => {
   try {
     await databaseConnection()
   } catch (err) {
@@ -56,7 +56,7 @@ export const initServer = () => {
   const app = express()
   try {
     middlewares(app)
-    conectarDB()
+    connectDB()
     routes(app)
     app.listen(process.env.PORT)
     console.log(`Server  | Running on port ${process.env.PORT}`)
