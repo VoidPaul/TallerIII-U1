@@ -7,6 +7,7 @@ import morgan from "morgan"
 import { databaseConnection } from "./database.js"
 import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
+import companyRoutes from "../src/company/company.routes.js"
 import apiLimiter from "../src/middleware/rate-limit.js"
 
 const middlewares = (app) => {
@@ -38,10 +39,11 @@ const middlewares = (app) => {
 
 const routes = (app) => {
   app.use("/coperex-enterprise/v1/auth", authRoutes)
-  app.use("/coperex-enterprise/v1/user/", userRoutes)
+  app.use("/coperex-enterprise/v1/user", userRoutes)
+  app.use("/coperex-enterprise/v1/company", companyRoutes)
 }
 
-const conectarDB = async () => {
+const connectDB = async () => {
   try {
     await databaseConnection()
   } catch (err) {
@@ -54,7 +56,7 @@ export const initServer = () => {
   const app = express()
   try {
     middlewares(app)
-    conectarDB()
+    connectDB()
     routes(app)
     app.listen(process.env.PORT)
     console.log(`Server  | Running on port ${process.env.PORT}`)

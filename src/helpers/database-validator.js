@@ -1,4 +1,5 @@
 import User from "../user/user.model.js"
+import Company from "../company/company.model.js"
 
 export const userExists = async (uid = "") => {
   const exists = await User.findById(uid)
@@ -21,5 +22,19 @@ export const usernameExists = async (username = "") => {
 
   if (exists) {
     throw new Error(`Username ${username} is already in use.`)
+  }
+}
+
+export const companyExists = async (id = "") => {
+  const exists = await Company.findById(id)
+
+  if (!exists) {
+    throw new Error(`Company does not exist.`)
+  }
+}
+
+export const dateIsntFuture = async (foundationDate = "") => {
+  if (new Date(foundationDate) > new Date()) {
+    throw new Error(`Time travellers not allowed. The date cannot be in the future.`)
   }
 }
