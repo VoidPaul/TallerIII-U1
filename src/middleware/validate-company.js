@@ -5,6 +5,7 @@ import { validateFields } from "./field-error-handler.js"
 import { handleErrors } from "./error-handler.js"
 
 export const addCompanyValidator = [
+  validateJWT,
   body("name", "Company name required.").notEmpty(),
   body("address", "Company address required.").notEmpty(),
   body("email", "Enter a valid e-mail.").notEmpty().isEmail(),
