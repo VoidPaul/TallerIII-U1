@@ -1,4 +1,5 @@
 import Company from "./company.model.js"
+import { getSortOptions } from "../helpers/sorting.js"
 
 export const addCompany = async (req, res) => {
   try {
@@ -53,10 +54,11 @@ export const getCompanyById = async (req, res) => {
 export const getCompanies = async (req, res) => {
   try {
     const { limit = 5, from = 0 } = req.query
+    const sortOptions = getSortOptions(req.query)
 
     const [total, companies] = await Promise.all([
       Company.countDocuments(),
-      Company.find().skip(Number(from)).limit(Number(limit)),
+      Company.find().sort(sortOptions).skip(Number(from)).limit(Number(limit)),
     ])
 
     return res.status(200).json({
