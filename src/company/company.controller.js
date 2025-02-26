@@ -54,7 +54,7 @@ export const getCompanyById = async (req, res) => {
 export const getCompanies = async (req, res) => {
   try {
     const { limit = 5, from = 0 } = req.query
-    const sortOptions = getSortOptions(req.query)
+    const sortOptions = getSortOptions(req)
 
     const [total, companies] = await Promise.all([
       Company.countDocuments(),

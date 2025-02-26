@@ -42,7 +42,7 @@ const companySchema = Schema(
   },
   {
     versionKey: false,
-    timeStamps: true,
+    timestamps: true,
   }
 )
 
