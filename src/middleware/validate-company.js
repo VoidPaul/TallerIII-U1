@@ -20,9 +20,15 @@ export const addCompanyValidator = [
   handleErrors,
 ]
 
-export const getCompanyByIdValidator = [validateJWT]
+export const getCompanyByIdValidator = [
+  validateJWT,
+  param("id", "Not a valid MongoDB ID").isMongoId(),
+  param("id", "Company not registered or doesn't exist").custom(companyExists),
+  validateFields,
+  handleErrors,
+]
 
-export const getCompaniesValidator = [validateJWT]
+export const getCompaniesValidator = [validateJWT, validateFields, handleErrors]
 
 export const updateCompanyValidator = [
   validateJWT,
