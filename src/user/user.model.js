@@ -46,7 +46,7 @@ const userSchema = Schema(
   },
   {
     versionKey: false,
-    timeStamps: true,
+    timestamps: true,
   }
 )
 
