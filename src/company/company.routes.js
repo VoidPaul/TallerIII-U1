@@ -15,6 +15,6 @@ router.get("/list", getCompaniesValidator, getCompanies)
 
 router.get("/:id", getCompanyByIdValidator, getCompanyById)
 
-router.put("/edit", updateCompanyValidator, updateCompany)
+router.put("/edit/:id", updateCompanyValidator, updateCompany)
 
 export default router

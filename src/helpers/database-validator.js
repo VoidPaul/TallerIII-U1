@@ -32,3 +32,9 @@ export const companyExists = async (id = "") => {
     throw new Error(`Company does not exist.`)
   }
 }
+
+export const dateIsntFuture = async (foundationDate = "") => {
+  if (new Date(foundationDate) > new Date()) {
+    throw new Error(`Time travellers not allowed. The date cannot be in the future.`)
+  }
+}

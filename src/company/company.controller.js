@@ -75,10 +75,24 @@ export const getCompanies = async (req, res) => {
 
 export const updateCompany = async (req, res) => {
   try {
+    const { id } = req.params
+    const data = req.body
+
+    if (data.foundationDate) {
+      data.yearsActive = new Date().getFullYear() - new Date(data.foundationDate).getFullYear()
+    }
+
+    const company = await Company.findByIdAndUpdate(id, data, { new: true })
+
+    return res.status(200).json({
+      success: true,
+      message: "Company data updated.",
+      company,
+    })
   } catch (err) {
     return res.status(500).json({
       success: false,
-      message: "Error listing companies.",
+      message: "Error updating company.",
       error: err.message,
     })
   }
