@@ -1,2 +1,20 @@
 import { Router } from "express"
-import { addCompany, getCompanyById, getCompanies, updateCompany } from "./company.controller"
+import {
+  addCompanyValidator,
+  getCompanyByIdValidator,
+  getCompaniesValidator,
+  updateCompanyValidator,
+} from "../middleware/validate-company.js"
+import { addCompany, getCompanyById, getCompanies, updateCompany } from "./company.controller.js"
+
+const router = Router()
+
+router.post("/add", addCompanyValidator, addCompany)
+
+router.get("/:id", getCompanyByIdValidator, getCompanyById)
+
+router.get("/list", getCompaniesValidator, getCompanies)
+
+router.put("/edit", updateCompanyValidator, updateCompany)
+
+export default router

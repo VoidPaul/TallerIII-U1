@@ -19,7 +19,7 @@ export const registerValidator = [
 export const loginValidator = [
   body("username", "Invalid username format.").optional().isString(),
   body("email", "Enter a valid e-mail.").optional().isEmail(),
-  body("password", "Invalid password.").isLength({ min: 8 }),
+  body("password", "Invalid password.").isStrongPassword(),
   validateFields,
   handleErrors,
 ]

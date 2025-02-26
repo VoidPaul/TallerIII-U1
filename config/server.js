@@ -7,6 +7,7 @@ import morgan from "morgan"
 import { databaseConnection } from "./database.js"
 import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
+import companyRoutes from "../src/company/company.routes.js"
 import apiLimiter from "../src/middleware/rate-limit.js"
 
 const middlewares = (app) => {
@@ -38,7 +39,8 @@ const middlewares = (app) => {
 
 const routes = (app) => {
   app.use("/coperex-enterprise/v1/auth", authRoutes)
-  app.use("/coperex-enterprise/v1/user/", userRoutes)
+  app.use("/coperex-enterprise/v1/user", userRoutes)
+  app.use("/coperex-enterprise/v1/company", companyRoutes)
 }
 
 const conectarDB = async () => {

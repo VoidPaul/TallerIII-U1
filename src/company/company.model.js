@@ -19,7 +19,7 @@ const companySchema = Schema(
     phone: {
       type: String,
       minLength: 8,
-      maxLnegth: 10,
+      maxLength: 10,
       required: [true, "Company phone required."],
     },
     impact: {
@@ -31,7 +31,7 @@ const companySchema = Schema(
       type: Date,
       required: [true, "Company fundation date required."],
     },
-    yearsInProduction: {
+    yearsActive: {
       type: Number,
       required: [true, "Company trajectory required."],
     },
@@ -47,7 +47,7 @@ const companySchema = Schema(
 )
 
 companySchema.methods.toJSON = function () {
-  const { name, _id, ...company } = this.toObject()
+  const { _id, ...company } = this.toObject()
   company.id = _id
   return company
 }

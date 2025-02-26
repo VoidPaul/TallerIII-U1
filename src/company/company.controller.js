@@ -4,6 +4,8 @@ export const addCompany = async (req, res) => {
   try {
     const data = req.body
 
+    data.yearsActive = new Date().getFullYear() - new Date(data.foundationDate).getFullYear()
+
     const company = new Company(data)
 
     await company.save()
@@ -50,4 +52,4 @@ export const getCompanyById = async (req, res) => {
 
 export const getCompanies = async (req, res) => {}
 
-export const updateCompanies = async (req, res) => {}
+export const updateCompany = async (req, res) => {}
