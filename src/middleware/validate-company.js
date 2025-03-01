@@ -42,3 +42,5 @@ export const updateCompanyValidator = [
   validateFields,
   handleErrors,
 ]
+
+export const generateExcelReportValidator = [validateJWT, validateFields, handleErrors]

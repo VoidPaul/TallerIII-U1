@@ -1,3 +1,4 @@
+import ExcelJS from "exceljs"
 import Company from "./company.model.js"
 import { getSortOptions } from "../helpers/sorting.js"
 
@@ -54,11 +55,10 @@ export const getCompanyById = async (req, res) => {
 export const getCompanies = async (req, res) => {
   try {
     const { limit = 5, from = 0 } = req.query
-    const sortOptions = getSortOptions(req)
 
     const [total, companies] = await Promise.all([
       Company.countDocuments(),
-      Company.find().sort(sortOptions).skip(Number(from)).limit(Number(limit)),
+      Company.find().sort(getSortOptions(req)).skip(Number(from)).limit(Number(limit)),
     ])
 
     return res.status(200).json({
@@ -95,6 +95,52 @@ export const updateCompany = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Error updating company.",
+      error: err.message,
+    })
+  }
+}
+
+export const generateExcelReport = async (req, res) => {
+  try {
+    const companies = await Company.find().sort(getSortOptions(req))
+
+    const companyFields = companies.map((company) => {
+      const { id, ...companyData } = company.toJSON()
+      return companyData
+    })
+
+    const workbook = new ExcelJS.Workbook()
+    const worksheet = workbook.addWorksheet("Compañías.")
+
+    worksheet.columns = [
+      { header: "Nombre", key: "name", width: 25 },
+      { header: "Dirección", key: "address", width: 50 },
+      { header: "Correo", key: "email", width: 30 },
+      { header: "Teléfono", key: "phone", width: 20 },
+      { header: "Impacto", key: "impact", width: 10 },
+      { header: "Fundación", key: "foundationDate", width: 10 },
+      { header: "Trayectoria", key: "yearsActive", width: 5 },
+      { header: "Categoría", key: "category", width: 20 },
+    ]
+
+    companyFields.forEach((company) => {
+      worksheet.addRow(company)
+    })
+
+    const headerRow = worksheet.getRow(1)
+
+    headerRow.font = { bold: true, color: { argb: "FFF2F2F7" }, size: 12 }
+    headerRow.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF16161D" } }
+
+    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    res.setHeader("Content-Disposition", "attachment; filename=Reporte-Compañías.xlsx")
+
+    await workbook.xlsx.write(res)
+    res.end()
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Error generating Excel report.",
       error: err.message,
     })
   }
