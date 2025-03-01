@@ -107,4 +107,80 @@ Las mismas reglas para crear una contraseña se aplican. El nombre del atrubuto 
 
 ## Manejo de Compañías
 
+### Creación de Compañías
+
+> Método: `POST`  
+> Ruta: `.../company/add`  
+> Acepta Parámetros Adicionales: Sí. Requirere token de Autenticación.
+
+Una vez colocado la solicitud correcta, se envía con un JSON con los siguientes datos:
+
+```JSON
+{
+    "name": "<nombre-de-empresa>",
+    "address": "<dirección-de-empresa>",
+    "email": "<correo-de-empresa>",
+    "phone": "<teléfono-de-empresa>",
+    "impact": "<impacto>", // Únicos valores aceptados: ALTO, MEDIO, BAJO.
+    "foundationDate": "<fecha-de-creación-de-la-empresa>", // Formato de fecha aceptado, YYYY-MM-DD
+    "category": "<categoría-de-la-empresa>" // De preferencia una sola palabra que describa el área que cubre.
+}
+```
+
+### Edición de Compañías
+
+> Método: `PUT`  
+> Ruta: `.../company/edit/:id`  
+> Acepta Parámetros Adicionales: Sí. Requirere token de Autenticación.
+
+Una vez colocado la solicitud correcta, se envía con un JSON con los siguientes datos:
+
+```JSON
+{
+    "name": "<nombre-de-empresa>",
+    "address": "<dirección-de-empresa>",
+    "email": "<correo-de-empresa>",
+    "phone": "<teléfono-de-empresa>",
+    "impact": "<impacto>", // Únicos valores aceptados: ALTO, MEDIO, BAJO.
+    "foundationDate": "<fecha-de-creación-de-la-empresa>", // Formato de fecha aceptado, YYYY-MM-DD
+    "category": "<categoría-de-la-empresa>" // De preferencia una sola palabra que describa el área que cubre.
+}
+```
+
+De nuevo, los parámetros que no se deseen editar no se deben colocar.
+
+### Listado de Compañías
+
+> Método: `GET`  
+> Ruta: `.../company/:id` (individual) y `.../company/list` (general)  
+> Acepta Parámetros Adicionales: Sí. Requirere token de Autenticación y Otros.
+
+Una vez colocada la autenticación, se puede enviar la solicitud para obtener la compañía(s) deseadas.
+
+#### Filtración de Compañías
+
+En cuanto al orden en que aparecen las compañías cuando se usa el listado general, fácilmente se puede elegir qué atributo seleccionar para el filtrado y en qué orden se desea que filtre.
+
+```
+.../company/list?sort=valor&order=valor
+```
+
+**_Únicos valores aceptados para `sort`: name, yearsActive, impact, category. Únicos valores para `order`: asc, desc._**
+
+Asimismo, se le pueden añadir parámetros para controlar cuántas compañías se muestran en una página y a partir de qué posición empezar a listar. Estas son:
+
+```
+.../company/list?from=inicio&limit=max-elementos
+```
+
+**_Únicamente valores numéricos enteros._**
+
+Si no se coloca ninún parámetro adicional, estarán ordenadas por el orden en que fueron agregadas a la base de datos.
+
 ### Generación de Reportes
+
+> Método: `GET`  
+> Ruta: `.../company/report`  
+> Acepta Parámetros Adicionales: Sí. Requirere token de Autenticación y Otros.
+
+Para generar los reportes de Excel, se envía una solicitud con la misma estructura que del listado, solo que los parámetros de paginación no están disponibles. Si no se coloca ninún parámetro adicional, estarán ordenadas por el orden en que fueron agregadas a la base de datos. Una vez obtenia la respuesta, se descarga el documento de Excel generado.

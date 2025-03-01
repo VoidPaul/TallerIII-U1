@@ -1,6 +1,6 @@
 import ExcelJS from "exceljs"
 import Company from "./company.model.js"
-import { getSortOptions } from "../helpers/sorting.js"
+import { getSortOptions } from "../helpers/sort-companies.js"
 
 export const addCompany = async (req, res) => {
   try {
