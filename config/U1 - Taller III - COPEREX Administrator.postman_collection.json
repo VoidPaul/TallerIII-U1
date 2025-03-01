@@ -1,257 +1,243 @@
 {
-	"info": {
-		"_postman_id": "42435a24-561d-416d-b78e-7b7a82a78cb2",
-		"name": "U1 - Taller III - COPEREX Administrator",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "37585419"
-	},
-	"item": [
-		{
-			"name": "company",
-			"item": [
-				{
-					"name": "add-company",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "// Valores aceptados para campo \"impact\": ALTO, MEDIO, BAJO\r\n{\r\n    \"name\": \"\",\r\n    \"address\": \"\",\r\n    \"email\": \"\",\r\n    \"phone\": \"\",\r\n    \"impact\": \"\",\r\n    \"foundationDate\": \"\",\r\n    \"category\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/coperex-enterprise/v1/company/add"
-					},
-					"response": []
-				},
-				{
-					"name": "get-company",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:3000/coperex-enterprise/v1/company/<id>"
-					},
-					"response": []
-				},
-				{
-					"name": "get-companies",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/coperex-enterprise/v1/company/list",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"coperex-enterprise",
-								"v1",
-								"company",
-								"list"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "order",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "from",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "edit-company",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "// Valores aceptados para campo \"impact\": ALTO, MEDIO, BAJO\r\n// Si no desea actualizar un dato, coméntelo antes de enviar la solicitud.\r\n\r\n{\r\n    \"name\": \"\"\r\n    ,\"address\": \"\"\r\n    ,\"email\": \"\"\r\n    ,\"phone\": \"\"\r\n    ,\"impact\": \"\"\r\n    ,\"foundationDate\": \"\"\r\n    ,\"category\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/coperex-enterprise/v1/company/edit/<id>"
-					},
-					"response": []
-				},
-				{
-					"name": "generate-excel-report",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/coperex-enterprise/v1/company/report",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"coperex-enterprise",
-								"v1",
-								"company",
-								"report"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "order",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "auth",
-			"item": [
-				{
-					"name": "register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"lastName\": \"\",\r\n    \"username\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"phone\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/coperex-enterprise/v1/auth/register"
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "// Des-comente `username` o `email` para iniciar sesión con uno de los dos.\r\n\r\n{\r\n    //\"username\": \"\",\r\n    //\"email\": \"\",\r\n    \"password\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/coperex-enterprise/v1/auth/login"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "user",
-			"item": [
-				{
-					"name": "get-by-id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:3000/coperex-enterprise/v1/user/profile/<uid>"
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "// Commente la línea(s) de los datos que no quire cambiar.\r\n// Asegúrese de colocar su token en Authorization > Bearer.\r\n\r\n{\r\n    \"name\": \"\"\r\n    ,\"lastName\": \"\"\r\n    ,\"username\": \"\"\r\n    ,\"email\": \"\"\r\n    ,\"phone\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/coperex-enterprise/v1/user/update"
-					},
-					"response": []
-				},
-				{
-					"name": "change-password",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {}
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"newPassword\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/coperex-enterprise/v1/user/update/password"
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "42435a24-561d-416d-b78e-7b7a82a78cb2",
+    "name": "U1 - Taller III - COPEREX Administrator",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "37585419"
+  },
+  "item": [
+    {
+      "name": "company",
+      "item": [
+        {
+          "name": "add-company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// Valores aceptados para campo \"impact\": ALTO, MEDIO, BAJO\r\n{\r\n    \"name\": \"\",\r\n    \"address\": \"\",\r\n    \"email\": \"\",\r\n    \"phone\": \"\",\r\n    \"impact\": \"\",\r\n    \"foundationDate\": \"\",\r\n    \"category\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/coperex-enterprise/v1/company/add"
+          },
+          "response": []
+        },
+        {
+          "name": "get-company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/coperex-enterprise/v1/company/<id>"
+          },
+          "response": []
+        },
+        {
+          "name": "get-companies",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/coperex-enterprise/v1/company/list",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["coperex-enterprise", "v1", "company", "list"],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "from",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit-company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// Valores aceptados para campo \"impact\": ALTO, MEDIO, BAJO\r\n// Si no desea actualizar un dato, coméntelo antes de enviar la solicitud.\r\n\r\n{\r\n    \"name\": \"\"\r\n    ,\"address\": \"\"\r\n    ,\"email\": \"\"\r\n    ,\"phone\": \"\"\r\n    ,\"impact\": \"\"\r\n    ,\"foundationDate\": \"\"\r\n    ,\"category\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/coperex-enterprise/v1/company/edit/<id>"
+          },
+          "response": []
+        },
+        {
+          "name": "generate-excel-report",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/coperex-enterprise/v1/company/report",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["coperex-enterprise", "v1", "company", "report"],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"\",\r\n    \"lastName\": \"\",\r\n    \"username\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"phone\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/coperex-enterprise/v1/auth/register"
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// Des-comente `username` o `email` para iniciar sesión con uno de los dos.\r\n\r\n{\r\n    //\"username\": \"\",\r\n    //\"email\": \"\",\r\n    \"password\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/coperex-enterprise/v1/auth/login"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "get-by-id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/coperex-enterprise/v1/user/profile/<uid>"
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// Commente la línea(s) de los datos que no quire cambiar.\r\n// Asegúrese de colocar su token en Authorization > Bearer.\r\n\r\n{\r\n    \"name\": \"\"\r\n    ,\"lastName\": \"\"\r\n    ,\"username\": \"\"\r\n    ,\"email\": \"\"\r\n    ,\"phone\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/coperex-enterprise/v1/user/update"
+          },
+          "response": []
+        },
+        {
+          "name": "change-password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {}
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"newPassword\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/coperex-enterprise/v1/user/update/password"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }
